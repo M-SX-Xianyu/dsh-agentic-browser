@@ -50,10 +50,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YOUR_NAME/dsh-agentic-browser.git"
+    "url": "git+https://github.com/M-SX-Xianyu/dsh-agentic-browser.git"
   },
   "bugs": {
-    "url": "https://github.com/YOUR_NAME/dsh-agentic-browser/issues"
+    "url": "https://github.com/M-SX-Xianyu/dsh-agentic-browser/issues"
   },
-  "homepage": "https://github.com/YOUR_NAME/dsh-agentic-browser#readme"
+  "homepage": "https://github.com/M-SX-Xianyu/dsh-agentic-browser#readme"
 }

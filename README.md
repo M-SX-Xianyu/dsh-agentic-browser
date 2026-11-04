@@ -2,6 +2,8 @@
 
 > DSH 右侧栏的 **Agent 浏览器**面板：接近原生内置浏览器的体验，但由 Agent 直接驱动——22 个 `dsh_agentic_browser_*` 工具、可见的鼠标光标动画、跨会话后台打开、批量操作一次完成。
 
+![Agent 浏览器面板截图](docs/panel-screenshot.png)
+
 ## 安装
 
 环境要求：**官方 DSH Desktop ≥ 0.2.1-rc.x**（网页载体依赖 `dshDesktop.browser` 桥协议 v1；Web 版装后面板提示“需要 DSH Desktop 运行时”）。依赖 `@deepseek-ai/dsh-tools` 在安装时自动从 DSH 自身解析，无需手动准备。
@@ -19,7 +21,7 @@ install_bundle  target=dsh-agentic-browser@1.0.0
 ### 方式二：从 GitHub 源码安装（适合改源码自用）
 
 ```bash
-git clone https://github.com/YOUR_NAME/dsh-agentic-browser.git
+git clone https://github.com/M-SX-Xianyu/dsh-agentic-browser.git
 ```
 
 然后在 DSH 中：
