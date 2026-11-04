@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "DSH Browser",
+    "description": "Plugin-owned right-sidebar browser with Agent tools. Page snapshots are shared with the Agent; do not use for secrets. Redaction is best-effort; browser storage, cookies, and isolation behavior are unverified."
+  }
+}

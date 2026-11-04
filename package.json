@@ -1,0 +1,59 @@
+{
+  "name": "dsh-agentic-browser",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./README.md": "./README.md"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "host-protocol.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md"
+  ],
+  "dependencies": {
+    "@deepseek-ai/dsh-tools": "0.2.1-rc.3"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-sidebar-right",
+        "@deepseek-ai/dsh-client-ui-session",
+        "@deepseek-ai/dsh-client-ui-workspace"
+      ]
+    }
+  },
+  "description": "DSH plugin: an agentic browser panel in the right sidebar — a near-native browsing experience that the Agent drives directly (Agent 浏览器插件：DSH 右侧栏近原生浏览器面板，Agent 可直接操作)",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "browser",
+    "webview",
+    "agent-tools"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR_NAME/dsh-agentic-browser.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YOUR_NAME/dsh-agentic-browser/issues"
+  },
+  "homepage": "https://github.com/YOUR_NAME/dsh-agentic-browser#readme"
+}
