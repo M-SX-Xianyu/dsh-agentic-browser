@@ -66,8 +66,15 @@ window.__ModuleLoader__.load({
       componentDidCatch(error) { reportClientError("render", error?.message || error); }
       render() {
         if (this.state.error) {
+          // keepMounted keeps this component alive across session switches,
+          // so without a retry an error would lock the panel until restart.
           return h("div", { style: { padding: 12, fontSize: 12, color: "var(--dsw-alias-state-error-primary, #c00)", whiteSpace: "pre-wrap", wordBreak: "break-all" } },
-            "Agent 浏览器面板渲染错误：", String(this.state.error?.message || this.state.error));
+            "Agent 浏览器面板渲染错误：", String(this.state.error?.message || this.state.error),
+            h("button", {
+              type: "button",
+              style: { display: "block", marginTop: 8, padding: "4px 12px", fontSize: 12, cursor: "pointer" },
+              onClick: () => this.setState({ error: null }),
+            }, "重试"));
         }
         return this.props.children;
       }
@@ -1529,11 +1536,13 @@ ${AGENT_CURSOR_JS}
           menuItem(t("external"), () => { setMenuOpen(false); if (current?.url) window.open(current.url, "_blank", "noopener,noreferrer"); }, !current?.url)) : null,
         resolutionOpen ? h("div", { className: "eb-resbar" },
           h("span", null, t("resolution.label")),
-          h("input", { type: "number", min: 200, max: 7680, value: resDraft.w, onChange: (e) => setResDraft((d) => ({ ...d, w: Number(e.currentTarget.value) })) }),
+          h("input", { type: "number", min: 200, max: 7680, value: resDraft.w, onChange: (e) => { const v = Number(e.currentTarget.value); setResDraft((d) => ({ ...d, w: v })); } }),
           h("span", null, "×"),
-          h("input", { type: "number", min: 200, max: 7680, value: resDraft.h, onChange: (e) => setResDraft((d) => ({ ...d, h: Number(e.currentTarget.value) })) }),
+          h("input", { type: "number", min: 200, max: 7680, value: resDraft.h, onChange: (e) => { const v = Number(e.currentTarget.value); setResDraft((d) => ({ ...d, h: v })); } }),
           h("button", { type: "button", onClick: () => { if (activeTabId && resDraft.w >= 200 && resDraft.h >= 200) applyResolution(activeTabId, { w: Math.round(resDraft.w), h: Math.round(resDraft.h) }); } }, t("resolution.apply")),
-          h("select", { className: "eb-resselect", value: "", onChange: (e) => { const preset = RESOLUTION_PRESETS.find((p) => p.label === e.currentTarget.value); if (preset && activeTabId) { setResDraft({ w: preset.w, h: preset.h }); applyResolution(activeTabId, { w: preset.w, h: preset.h }); } e.currentTarget.value = ""; } },
+          // The preset ALWAYS updates the draft; only the application to a
+          // live tab is gated on having an active tab.
+          h("select", { className: "eb-resselect", value: "", onChange: (e) => { const label = e.currentTarget.value; const preset = RESOLUTION_PRESETS.find((p) => p.label === label); if (preset) setResDraft({ w: preset.w, h: preset.h }); if (preset && activeTabId) { applyResolution(activeTabId, { w: preset.w, h: preset.h }); } e.currentTarget.value = ""; } },
             h("option", { value: "" }, t("resolution.presets")),
             RESOLUTION_PRESETS.map((preset) => h("option", { key: preset.label, value: preset.label }, preset.label))),
           h("button", { type: "button", onClick: () => { if (activeTabId) applyResolution(activeTabId, null); } }, t("resolution.clear")),
