@@ -13,10 +13,10 @@
 在 DSH 中让 Agent 执行（或插件管理界面等价操作）：
 
 ```
-install_bundle  target=dsh-agentic-browser@1.0.0
+install_bundle  target=dsh-agentic-browser@latest
 ```
 
-装完**重启 DSH**。以后升级只需把版本号换成最新再执行一次 `install_bundle`。
+装完**重启 DSH**。`@latest` 始终装最新版；如需锁定具体版本，把 `latest` 换成版本号（如 `dsh-agentic-browser@1.0.1`）再执行一次即可。
 
 ### 方式二：从 GitHub 源码安装（适合改源码自用）
 
